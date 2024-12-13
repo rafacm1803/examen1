@@ -1,6 +1,5 @@
 "use client"; // Esto convierte este archivo en un componente del cliente
 import { Button } from "@/components/ui/button";
-import {Button as Button1} from "@mui/material";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation"; // Importa useRouter para la navegación
 
@@ -34,10 +33,10 @@ export default function Landing() {
       {/* Sección izquierda */}
       <div className="left-section flex-1 bg-gradient-to-r from-green-200 to-blue-200 rounded-3xl flex flex-col justify-center items-center text-center p-8 shadow-lg">
         <h1 className="text-5xl font-bold text-blue-800 mb-4 font-poppins">
-          Bienvenido a Couchsurfing!
+          Bienvenido!
         </h1>
         <p className="text-xl text-gray-700 italic font-poppins">
-          Romantizando dormir en un puñetero sofa
+          Parcial 3 de Rafael Ceballos Martinez
         </p>
         <div className="mt-8 flex space-x-4 text-2xl">
           <span>💻</span>
@@ -62,7 +61,7 @@ export default function Landing() {
             <div>
               <p className="mb-4">Hola, {session.user.email}. Estás autenticado.</p>
               <Button
-                className="w-full bg-blue-500 text-white mb-4"
+                className="w-full text-gray-700 bg-blue-500 text-white mb-4"
                 onClick={navigateToHome} // Redirige a la página de home
               >
                 Ir a Home
