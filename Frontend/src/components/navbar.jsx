@@ -70,6 +70,13 @@ export default function Navbar() {
             Filtrar 2
           </Button>
 
+          <Button 
+            onClick={() => router.push("/pagina5")} // Ruta del Botón 2
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 font-semibold"
+          >
+            Mostrar Mapas
+          </Button>
+
           {/* Si el usuario está logueado, mostrar el nombre (solo primer nombre) y el botón de logout */}
           {session ? (
             <div className="flex items-center space-x-4">
