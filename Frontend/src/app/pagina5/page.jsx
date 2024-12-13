@@ -45,7 +45,7 @@ export default function Page() {
       <main className="flex flex-1 p-4">
         <div className="right-section flex-1 bg-white rounded-3xl p-8 shadow-lg flex flex-col justify-center items-center text-center overflow-y-auto max-h-screen">
           {loading && <p>Cargando...</p>}
-          <div className="sofas-container">
+          <div className="sofas-container" style={{marginTop: '20px'}}>
             {sofas.map((sofa) => (
               <div key={sofa._id} className="sofa-item bg-gray-200 text-gray-700 p-4 rounded-lg shadow-md mb-4">
                 <h3 className="text-2xl text-gray-700 font-bold">{sofa.direccion}</h3>
