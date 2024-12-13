@@ -1,18 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 import Navbar from '@/components/navbar';
-
-// Configurar el icono de Leaflet
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-});
 
 const SOFA_BASE_API = process.env.NEXT_PUBLIC_SOFA_DB_URI;
 
@@ -54,21 +43,11 @@ export default function Page() {
                 <h3 className="text-2xl text-gray-700 font-bold">{sofa.direccion}</h3>
                 <p>Host: {sofa.anfitrion}</p>
                 <p>Coordenadas: {sofa.coordenadas.latitud}, {sofa.coordenadas.longitud}</p>
-                <MapContainer
-                  center={[sofa.coordenadas.latitud, sofa.coordenadas.longitud]}
-                  zoom={13}
-                  style={{ height: "200px", width: "100%" }}
-                >
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  />
-                  <Marker position={[sofa.coordenadas.latitud, sofa.coordenadas.longitud]}>
-                    <Popup>
-                      {sofa.direccion}
-                    </Popup>
-                  </Marker>
-                </MapContainer>
+                <OpenStreetMap
+                  lat={sofa.coordenadas.latitud}
+                  lng={sofa.coordenadas.longitud}
+                  direccion={sofa.direccion}
+                />
               </div>
             ))}
           </div>
@@ -76,4 +55,33 @@ export default function Page() {
       </main>
     </div>
   );
+}
+
+function OpenStreetMap({ lat, lng, direccion }) {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
+    script.async = true;
+    script.onload = () => {
+      const map = window.L.map(mapRef.current).setView([lat, lng], 13);
+
+      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      window.L.marker([lat, lng]).addTo(map)
+        .bindPopup(direccion)
+        .openPopup();
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [lat, lng, direccion]);
+
+  return <div ref={mapRef} style={{ height: '200px', width: '100%' }} />;
 }
