@@ -10,7 +10,6 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import Overlay from 'ol/Overlay';
 import { fromLonLat } from 'ol/proj';
-import Navbar from "@/components/navbar";
 
 const USUARIO_BASE_API = process.env.NEXT_PUBLIC_USUARIO_DB_URI;
 
@@ -71,7 +70,6 @@ export default function MapaUsuario() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <Navbar />
       <main className="flex flex-1 p-4">
         <div className="map-container flex-1 bg-white rounded-3xl p-8 shadow-lg" style={{ height: '80vh' }}>
           <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>
