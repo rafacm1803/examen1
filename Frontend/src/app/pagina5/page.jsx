@@ -18,7 +18,7 @@ export default function Page() {
   const fetchSofas = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${SOFA_BASE_API}/buscar`, {
+      const response = await axios.get(`${SOFA_BASE_API}/`, {
         headers: {
           "Authorization": `Bearer ${session.accessToken}`,
           "Content-Type": "application/json",
