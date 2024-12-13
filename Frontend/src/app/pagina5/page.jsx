@@ -3,6 +3,13 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Navbar from '@/components/navbar';
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+import Overlay from 'ol/Overlay';
+import { fromLonLat } from 'ol/proj';
 
 const SOFA_BASE_API = process.env.NEXT_PUBLIC_SOFA_DB_URI;
 
@@ -61,35 +68,35 @@ export default function Page() {
 }
 
 function OpenStreetMap({ lat, lng, direccion }) {
-    const mapRef = useRef(null);
-  
-    useEffect(() => {
-      const map = new window.ol.Map({
-        target: mapRef.current,
-        layers: [
-          new window.ol.layer.Tile({
-            source: new window.ol.source.OSM(),
-          }),
-        ],
-        view: new window.ol.View({
-          center: window.ol.proj.fromLonLat([lng, lat]),
-          zoom: 13,
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const map = new Map({
+      target: mapRef.current,
+      layers: [
+        new TileLayer({
+          source: new OSM(),
         }),
-      });
-  
-      const marker = new window.ol.Overlay({
-        position: window.ol.proj.fromLonLat([lng, lat]),
-        positioning: 'center-center',
-        element: document.createElement('div'),
-        stopEvent: false,
-      });
-      marker.getElement().className = 'marker';
-      map.addOverlay(marker);
-  
-      return () => {
-        map.setTarget(null);
-      };
-    }, [lat, lng, direccion]);
-  
-    return <div ref={mapRef} style={{ height: '100%', width: '100%' }} />;
-  }
+      ],
+      view: new View({
+        center: fromLonLat([lng, lat]),
+        zoom: 13,
+      }),
+    });
+
+    const marker = new Overlay({
+      position: fromLonLat([lng, lat]),
+      positioning: 'center-center',
+      element: document.createElement('div'),
+      stopEvent: false,
+    });
+    marker.getElement().className = 'marker';
+    map.addOverlay(marker);
+
+    return () => {
+      map.setTarget(null);
+    };
+  }, [lat, lng, direccion]);
+
+  return <div ref={mapRef} style={{ height: '100%', width: '100%' }} />;
+}
