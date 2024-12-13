@@ -97,7 +97,7 @@ export default function Home() {
       <main className="flex flex-1 p-4">
         <div className="left-section flex-1 bg-gradient-to-r from-green-200 to-blue-200 rounded-3xl flex flex-col justify-center items-center text-center p-8 shadow-lg">
           <h1 className="text-5xl font-bold text-blue-800 mb-4 font-poppins">
-            ¡Bienvenido a CouchSurfing!
+            ¡Bienvenido a MiMapa!
           </h1>
           <p className="text-xl text-gray-700 italic font-poppins">
             Formulario de imagenes y mapas

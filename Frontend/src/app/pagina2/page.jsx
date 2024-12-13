@@ -1,4 +1,7 @@
-"use client";
+
+
+
+/*"use client";
 
 import { useSession } from "next-auth/react";
 import { useState } from "react"; 
@@ -124,3 +127,4 @@ export default function Reserva() {
     </div>
   );
 }
+*/

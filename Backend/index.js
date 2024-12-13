@@ -38,6 +38,9 @@ app.use("/sofa", sofaRouter);
 const reservaRouter = require("./Controller/reservaRouter");
 app.use("/reserva", reservaRouter);
 
+const usuarioRouter = require("./Controller/usuarioRouter");
+app.use("/usuario", usuarioRouter);
+
 
 app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
 
