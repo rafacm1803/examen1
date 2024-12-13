@@ -1,11 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar";
-import { TextField, IconButton } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import axios from "axios";
 
 const MAPAS_BASE_API = process.env.NEXT_PUBLIC_VERSION_MAPA_API;
@@ -67,7 +63,7 @@ export default function Home() {
         {/* Sección izquierda */}
         <div className="left-section flex-1 bg-gradient-to-r from-green-200 to-blue-200 rounded-3xl flex flex-col justify-center items-center text-center p-8 shadow-lg">
           <h1 className="text-5xl font-bold text-blue-800 mb-4 font-poppins">
-            Mostrar todo
+            Mostrar nada
           </h1>
           <p className="text-xl text-gray-700 italic font-poppins">
             Sofas y reservas
