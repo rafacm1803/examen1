@@ -145,7 +145,6 @@ export default function Home() {
               ) : (
                 sofas.map((sofa) => (
                   <div key={sofa._id} className="bg-gray-200 text-gray-600 p-4 rounded-lg shadow-md">
-                    {sofa.direccion = setDireccionFiltro(direccion)}
                     <h3 className="text-2xl font-bold">{sofa.direccion}</h3>
                     <p>Host: {sofa.anfitrion}</p>
                     <p>Coordenadas: {sofa.coordenadas.latitud}, {sofa.coordenadas.longitud}</p>
@@ -164,22 +163,7 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                    {/* Mapa */}
-                    <div className="mt-8 flex justify-center">
-                        {iframeUrl ? (
-                        <iframe
-                          src={iframeUrl}
-                          width="100%"
-                          height="400"
-                          frameBorder="0"
-                          className="rounded-lg shadow-md"
-                          allowFullScreen=""
-                        ></iframe>
-                      ) : (
-                        <p className="text-xl text-gray-600">El mapa se generará aquí.</p>
-                      )}
-                    </div>
-  
+                    
                     {/* Reservas */}
                     <div className="mt-6">
                       {reservas[sofa.anfitrion] && reservas[sofa.anfitrion].length > 0 ? (
