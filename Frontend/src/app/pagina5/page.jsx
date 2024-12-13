@@ -42,10 +42,10 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar />
-      <main className="flex flex-1 p-4">
-        <div className="right-section flex-1 bg-white rounded-3xl p-8 shadow-lg flex flex-col justify-center items-center text-center overflow-y-auto max-h-screen">
+      <main className="flex flex-1 p-4" style={{ paddingTop: '80px' }}>
+        <div className="right-section flex-1 text-gray-700 bg-white rounded-3xl p-8 shadow-lg flex flex-col justify-center items-center text-center overflow-y-auto max-h-screen">
           {loading && <p>Cargando...</p>}
-          <div className="sofas-container" style={{marginTop: '20px'}}>
+          <div className="sofas-container" style={{ marginTop: '20px' }}>
             {sofas.map((sofa) => (
               <div key={sofa._id} className="sofa-item bg-gray-200 text-gray-700 p-4 rounded-lg shadow-md mb-4">
                 <h3 className="text-2xl text-gray-700 font-bold">{sofa.direccion}</h3>
