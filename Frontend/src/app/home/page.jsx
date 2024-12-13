@@ -97,7 +97,7 @@ export default function Home() {
             ¡Bienvenido a MiMapa!
           </h1>
           <p className="text-xl text-gray-700 italic font-poppins">
-            Formulario de visitas. ¿A qué lugar has viajado?
+            ¿A qué lugar has viajado?
           </p>
         </div>
 
