@@ -61,30 +61,35 @@ export default function Page() {
 }
 
 function OpenStreetMap({ lat, lng, direccion }) {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
-    script.async = true;
-    script.onload = () => {
-      const map = window.L.map(mapRef.current).setView([lat, lng], 13);
-
-      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-
-      window.L.marker([lat, lng]).addTo(map)
-        .bindPopup(direccion)
-        .openPopup();
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, [lat, lng, direccion]);
-
-  return <div ref={mapRef} style={{ height: '100%', width: '100%' }} />;
-}
+    const mapRef = useRef(null);
+  
+    useEffect(() => {
+      const map = new window.ol.Map({
+        target: mapRef.current,
+        layers: [
+          new window.ol.layer.Tile({
+            source: new window.ol.source.OSM(),
+          }),
+        ],
+        view: new window.ol.View({
+          center: window.ol.proj.fromLonLat([lng, lat]),
+          zoom: 13,
+        }),
+      });
+  
+      const marker = new window.ol.Overlay({
+        position: window.ol.proj.fromLonLat([lng, lat]),
+        positioning: 'center-center',
+        element: document.createElement('div'),
+        stopEvent: false,
+      });
+      marker.getElement().className = 'marker';
+      map.addOverlay(marker);
+  
+      return () => {
+        map.setTarget(null);
+      };
+    }, [lat, lng, direccion]);
+  
+    return <div ref={mapRef} style={{ height: '100%', width: '100%' }} />;
+  }
