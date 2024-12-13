@@ -1,21 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
-import { useSession } from 'next-auth/react';
-import axios from 'axios';
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import Overlay from 'ol/Overlay';
-import { fromLonLat } from 'ol/proj';
+import { useSession } from "next-auth/react";
 import Navbar from "@/components/navbar";
-import MapaUsuario from "@/components/mapaUsuario";
+import MapaUsuario from '@/components/mapaUsuario';
 
-const USUARIO_BASE_API = process.env.NEXT_PUBLIC_USUARIO_DB_URI;
-
-export default function Mapa() {
+export default function MapaUser() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
