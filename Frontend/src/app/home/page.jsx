@@ -112,7 +112,7 @@ export default function Home() {
               maxWidth: "400px",
             }}
           >
-            <TextField label="Ciudad" value={direccion} onChange={(e) => setCiudad(e.target.value)} required />
+            <TextField label="Ciudad" value={ciudad} onChange={(e) => setCiudad(e.target.value)} required />
 
             {/* Renderiza dinámicamente los campos para imágenes */}
             {images.map((image, index) => (
