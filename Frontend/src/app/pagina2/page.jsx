@@ -10,6 +10,7 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import Overlay from 'ol/Overlay';
 import { fromLonLat } from 'ol/proj';
+import Navbar from "@/components/navbar";
 
 const USUARIO_BASE_API = process.env.NEXT_PUBLIC_USUARIO_DB_URI;
 
