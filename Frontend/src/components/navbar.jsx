@@ -29,7 +29,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center max-w-screen-xl mx-auto">
         <div className="flex items-center space-x-6">
           {/* Logo o nombre */}
-          <h1 className="text-3xl font-bold text-blue-800 font-poppins">Mi App</h1>
+          <h1 className="text-3xl font-bold text-blue-800 font-poppins">MiMapa</h1>
         </div>
 
         {/* Menú de navegación */}

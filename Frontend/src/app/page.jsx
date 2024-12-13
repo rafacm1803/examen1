@@ -1,12 +1,11 @@
-"use client"; // Esto convierte este archivo en un componente del cliente
+"use client";
 import { Button } from "@/components/ui/button";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation"; // Importa useRouter para la navegación
+import { useRouter } from "next/navigation"; 
 
 export default function Landing() {
   // Hook para obtener la sesión del usuario
   const { data: session, status } = useSession();
-  const router = useRouter(); // Inicializa el router
 
   // Verifica el estado de la sesión
   if (status === "loading") {
@@ -14,17 +13,14 @@ export default function Landing() {
   }
 
   const handleGitHubLogin = () => {
-    // Redirige al usuario al flujo de inicio de sesión con GitHub
     signIn("github");
   };
 
   const handleLogout = () => {
-    // Cierra la sesión
     signOut();
   };
 
   const navigateToHome = () => {
-    // Redirige a la página de home
     router.push("/home");
   };
 
@@ -33,7 +29,7 @@ export default function Landing() {
       {/* Sección izquierda */}
       <div className="left-section flex-1 bg-gradient-to-r from-green-200 to-blue-200 rounded-3xl flex flex-col justify-center items-center text-center p-8 shadow-lg">
         <h1 className="text-5xl font-bold text-blue-800 mb-4 font-poppins">
-          Bienvenido!
+          Bienvenido a MiMapa!
         </h1>
         <p className="text-xl text-gray-700 italic font-poppins">
           Parcial 3 de Rafael Ceballos Martinez
@@ -59,10 +55,9 @@ export default function Landing() {
             </Button>
           ) : (
             <div>
-              <p className="mb-4">Hola, {session.user.email}. Estás autenticado.</p>
+              <p className="mb-4 text-gray-700">Hola, {session.user.email}. Ya has iniciado sesion.</p>
               <Button
                 className="w-full text-gray-700 bg-blue-500 text-white mb-4"
-                onClick={navigateToHome} // Redirige a la página de home
               >
                 Ir a Home
               </Button>
