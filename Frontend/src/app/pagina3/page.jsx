@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar";
 import axios from "axios";
@@ -190,4 +190,26 @@ export default function Home() {
     </div>
   );
   
+}
+
+function OpenStreetMap({ lat, lng, direccion }) {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const map = new window.L.map(mapRef.current).setView([lat, lng], 13);
+
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    window.L.marker([lat, lng]).addTo(map)
+      .bindPopup(direccion)
+      .openPopup();
+
+    return () => {
+      map.remove();
+    };
+  }, [lat, lng, direccion]);
+
+  return <div ref={mapRef} style={{ height: '200px', width: '100%' }} />;
 }
