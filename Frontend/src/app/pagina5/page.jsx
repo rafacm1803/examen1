@@ -44,11 +44,13 @@ export default function Page() {
                 <h3 className="text-2xl text-gray-700 font-bold">{sofa.direccion}</h3>
                 <p>Host: {sofa.anfitrion}</p>
                 <p>Coordenadas: {sofa.coordenadas.latitud}, {sofa.coordenadas.longitud}</p>
-                <OpenStreetMap
-                  lat={sofa.coordenadas.latitud}
-                  lng={sofa.coordenadas.longitud}
-                  direccion={sofa.direccion}
-                />
+                <div className="map-container" style={{ height: '200px', width: '100%', marginTop: '10px' }}>
+                  <OpenStreetMap
+                    lat={sofa.coordenadas.latitud}
+                    lng={sofa.coordenadas.longitud}
+                    direccion={sofa.direccion}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -84,5 +86,5 @@ function OpenStreetMap({ lat, lng, direccion }) {
     };
   }, [lat, lng, direccion]);
 
-  return <div ref={mapRef} style={{ height: '200px', width: '100%' }} />;
+  return <div ref={mapRef} style={{ height: '100%', width: '100%' }} />;
 }
