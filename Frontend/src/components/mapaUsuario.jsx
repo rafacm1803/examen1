@@ -69,12 +69,8 @@ export default function MapaUsuario() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      <main className="flex flex-1 p-4">
-        <div className="map-container flex-1 bg-white rounded-3xl p-8 shadow-lg" style={{ height: '80vh' }}>
-          <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>
-        </div>
-      </main>
+    <div className="map-container flex-1 bg-white rounded-3xl p-8 shadow-lg" style={{ height: '80vh' }}>
+      <div ref={mapRef} style={{ height: '100%', width: '100%' }}></div>
     </div>
   );
 }

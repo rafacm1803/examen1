@@ -53,7 +53,7 @@ export default function Navbar() {
             onClick={() => router.push("/pagina2")} // Ruta del Botón 2
             className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg px-4 py-2 font-semibold"
           >
-            Formulario 2
+            Mapa Usuario
           </Button>
 
           <Button 
