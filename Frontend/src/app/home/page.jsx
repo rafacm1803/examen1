@@ -16,8 +16,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   
   // Estados del formulario
-  const [direccion, setDireccion] = useState("");
-  const [ubicacion, setUbicacion] = useState("");
+  const [ciudad, setCiudad] = useState("");
   const [images, setImages] = useState([""]); // Estado para múltiples URLs de imágenes
 
   if (status === "loading") {
@@ -43,9 +42,9 @@ export default function Home() {
     event.preventDefault();
   
     let coordenadas = null;
-    if (ubicacion.trim()) {
+    if (ciudad.trim()) {
       try {
-        const response = await axios.get(`${MAPAS_BASE_API}/${encodeURIComponent(ubicacion)}`);
+        const response = await axios.get(`${MAPAS_BASE_API}/${encodeURIComponent(ciudad)}`);
         if (response.status === 200 && response.data) {
           coordenadas = { latitud: response.data.lat, longitud: response.data.lon };
         } else {
@@ -65,10 +64,8 @@ export default function Home() {
     }
   
     const data = {
-      anfitrion: session.user.email,
-      direccion: direccion.trim(),
-      latitud: coordenadas?.latitud || null,
-      longitud: coordenadas?.longitud || null,
+      viajeroEmail: session.user.email,
+      ciudad: ciudad.trim(),
       fotos: images, // Incluye las URLs de las imágenes directamente
     };
   
@@ -100,7 +97,7 @@ export default function Home() {
             ¡Bienvenido a MiMapa!
           </h1>
           <p className="text-xl text-gray-700 italic font-poppins">
-            Formulario de imagenes y mapas
+            Formulario de visitas. ¿A qué lugar has viajado?
           </p>
         </div>
 
@@ -115,14 +112,7 @@ export default function Home() {
               maxWidth: "400px",
             }}
           >
-            <TextField label="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
-            <TextField
-              label="Ubicacion"
-              value={ubicacion}
-              onChange={(e) => setUbicacion(e.target.value)}
-              helperText="Ejemplo: Calle Mayor, 1, Madrid"
-              multiline
-            />
+            <TextField label="Ciudad" value={direccion} onChange={(e) => setCiudad(e.target.value)} required />
 
             {/* Renderiza dinámicamente los campos para imágenes */}
             {images.map((image, index) => (
